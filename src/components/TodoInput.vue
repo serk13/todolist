@@ -1,15 +1,21 @@
 <template>
-  <form @submit.prevent="handleSubmit" class="todo-input">
-    <input
-      v-model="newTodoText"
-      type="text"
-      placeholder="Neue Aufgabe hinzufügen..."
-      :aria-label="'Neue Aufgabe eingeben'"
-    />
-    <button type="submit" :disabled="!newTodoText.trim()">
-      Hinzufügen
-    </button>
-  </form>
+  <div>
+    <form @submit.prevent="handleSubmit" class="todo-input">
+      <input
+        v-model="newTodoText"
+        type="text"
+        placeholder="Neue Aufgabe hinzufügen..."
+        :aria-label="'Neue Aufgabe eingeben'"
+        @input="showError = false"
+      />
+      <button type="submit" :disabled="!newTodoText.trim()">
+        Hinzufügen
+      </button>
+    </form>
+    <p v-if="showError" class="error-message">
+      Bitte geben Sie einen Text für die Aufgabe ein.
+    </p>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -18,10 +24,16 @@ import { useTodoStore } from '@/stores/todoStore'
 
 const todoStore = useTodoStore()
 const newTodoText = ref('')
+const showError = ref(false)
 
 const handleSubmit = () => {
+  if (!newTodoText.value.trim()) {
+    showError.value = true
+    return
+  }
   todoStore.addTodo(newTodoText.value)
   newTodoText.value = ''
+  showError.value = false
 }
 </script>
 
@@ -29,7 +41,7 @@ const handleSubmit = () => {
 .todo-input {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 input {
@@ -56,5 +68,11 @@ button:disabled {
 
 button:not(:disabled):hover {
   background-color: #45a049;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
 }
 </style> 

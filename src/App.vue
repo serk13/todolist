@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import TodoList from './components/TodoList.vue'
 </script>
 
 <template>
@@ -17,7 +18,9 @@ import HelloWorld from './components/HelloWorld.vue'
     </div>
   </header>
 
-  <RouterView />
+  <main>
+    <TodoList />
+  </main>
 </template>
 
 <style scoped>
@@ -81,5 +84,20 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+
+main {
+  padding: 1rem;
+}
+
+* {
+  box-sizing: border-box;
 }
 </style>

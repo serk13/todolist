@@ -7,6 +7,8 @@
         placeholder="Neue Aufgabe hinzufügen..."
         :aria-label="'Neue Aufgabe eingeben'"
         @input="showError = false"
+        :style="inputStyle"
+        :class="{ 'has-error': showError }"
       />
       <button type="submit" :disabled="!newTodoText.trim()">
         Hinzufügen
@@ -19,12 +21,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useTodoStore } from '@/stores/todoStore'
 
 const todoStore = useTodoStore()
 const newTodoText = ref('')
 const showError = ref(false)
+
+const inputStyle = computed(() => {
+  return {
+    borderColor: showError.value ? '#ff4444' : '#ddd',
+    backgroundColor: showError.value ? '#fff8f8' : 'white'
+  }
+})
 
 const handleSubmit = () => {
   if (!newTodoText.value.trim()) {
@@ -50,6 +59,11 @@ input {
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input.has-error {
+  outline: none;
 }
 
 button {

@@ -4,18 +4,18 @@
       <input
         v-model="newTodoText"
         type="text"
-        placeholder="Neue Aufgabe hinzufügen..."
+        :placeholder="placeholder"
         :aria-label="'Neue Aufgabe eingeben'"
         @input="showError = false"
         :style="inputStyle"
         :class="{ 'has-error': showError }"
       />
       <button type="submit" :disabled="!newTodoText.trim()">
-        Hinzufügen
+        {{ buttonText }}
       </button>
     </form>
     <p v-if="showError" class="error-message">
-      Bitte geben Sie einen Text für die Aufgabe ein.
+      {{ errorMessage }}
     </p>
   </div>
 </template>
@@ -23,6 +23,12 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useTodoStore } from '@/stores/todoStore'
+
+const props = defineProps<{
+  placeholder: string
+  buttonText: string
+  errorMessage: string
+}>()
 
 const todoStore = useTodoStore()
 const newTodoText = ref('')

@@ -1,11 +1,12 @@
 <template>
-  <div class="todo-filter">
+  <div class="todo-filter" :class="{ 'vertical': isVertical }">
     <button
       v-for="option in filterOptions"
       :key="option.value"
       @click="todoStore.filter = option.value"
       :class="{ active: todoStore.filter === option.value }"
       :aria-label="'Filtere nach ' + option.label"
+      :style="{ backgroundColor: option.value === todoStore.filter ? activeColor : 'white' }"
     >
       {{ option.label }}
     </button>
@@ -14,6 +15,11 @@
 
 <script setup lang="ts">
 import { useTodoStore } from '@/stores/todoStore'
+
+const props = defineProps<{
+  isVertical?: boolean
+  activeColor?: string
+}>()
 
 const todoStore = useTodoStore()
 
@@ -31,18 +37,22 @@ const filterOptions = [
   margin: 1rem 0;
 }
 
+.todo-filter.vertical {
+  flex-direction: column;
+}
+
 button {
   padding: 0.5rem 1rem;
   border: 1px solid #ddd;
   background: white;
   border-radius: 4px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 button.active {
-  background-color: #4CAF50;
   color: white;
-  border-color: #4CAF50;
+  border-color: currentColor;
 }
 
 button:not(.active):hover {

@@ -2,8 +2,15 @@
   <div class="todo-list">
     <h1>Aufgabenliste</h1>
     
-    <TodoInput />
-    <TodoFilter />
+    <TodoInput 
+      placeholder="Neue Aufgabe hinzufügen..."
+      buttonText="Hinzufügen"
+      errorMessage="Bitte geben Sie einen Text für die Aufgabe ein."
+    />
+    <TodoFilter 
+      :isVertical="false"
+      activeColor="#4CAF50"
+    />
     
     <div class="todos" role="list">
       <TransitionGroup name="list">

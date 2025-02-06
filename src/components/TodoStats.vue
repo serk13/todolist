@@ -9,10 +9,10 @@
       <div class="progress-bar">
         <div 
           class="progress-fill"
-          :style="{ width: `${(todoStore.stats.completed / todoStore.stats.total) * 100}%` }"
+          :style="progressStyle"
         ></div>
       </div>
-      <p v-if="todoStore.stats.completed === todoStore.stats.total">
+      <p v-if="isCompleted">
         Alle Aufgaben erledigt! 🎉
       </p>
     </div>
@@ -20,9 +20,22 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useTodoStore } from '@/stores/todoStore'
 
 const todoStore = useTodoStore()
+
+const progressStyle = computed(() => {
+  const percentage = (todoStore.stats.completed / todoStore.stats.total) * 100
+  return {
+    width: `${percentage}%`,
+    backgroundColor: percentage === 100 ? '#4CAF50' : '#2196F3'
+  }
+})
+
+const isCompleted = computed(() => {
+  return todoStore.stats.completed === todoStore.stats.total
+})
 </script>
 
 <style scoped>
@@ -55,8 +68,7 @@ const todoStore = useTodoStore()
 
 .progress-fill {
   height: 100%;
-  background-color: #4CAF50;
-  transition: width 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 p {

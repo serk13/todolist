@@ -1,7 +1,9 @@
 <template>
-  <div class="todo-list">
-    <h1>Aufgabenliste</h1>
-    
+  <BaseCard class="todo-list">
+    <template #header>
+      <h1>Aufgabenliste</h1>
+    </template>
+
     <TodoInput 
       placeholder="Neue Aufgabe hinzufügen..."
       buttonText="Hinzufügen"
@@ -23,8 +25,10 @@
       </TransitionGroup>
     </div>
 
-    <TodoStats v-if="todoStore.stats.total > 0" />
-  </div>
+    <template #footer>
+      <TodoStats v-if="todoStore.stats.total > 0" />
+    </template>
+  </BaseCard>
 </template>
 
 <script setup lang="ts">
@@ -33,6 +37,7 @@ import TodoInput from './TodoInput.vue'
 import TodoItem from './TodoItem.vue'
 import TodoFilter from './TodoFilter.vue'
 import TodoStats from './TodoStats.vue'
+import BaseCard from './BaseCard.vue'
 
 const todoStore = useTodoStore()
 </script>
@@ -41,16 +46,12 @@ const todoStore = useTodoStore()
 .todo-list {
   max-width: 600px;
   margin: 2rem auto;
-  padding: 1rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
   color: #2c3e50;
-  margin-bottom: 2rem;
+  margin: 0;
 }
 
 .todos {

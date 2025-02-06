@@ -40,6 +40,7 @@ const { removeTodo, toggleTodo } = todoStore
 
 .todo-text {
   flex: 1;
+  color: #000;
 }
 
 .completed .todo-text {

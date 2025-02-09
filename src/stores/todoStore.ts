@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
+import { apiService } from '@/services/apiService'
 
 export interface Todo {
   id: number
@@ -30,6 +31,8 @@ const loadTodosFromStorage = (): Todo[] => {
 export const useTodoStore = defineStore('todo', () => {
   const todos = ref<Todo[]>(loadTodosFromStorage())
   const filter = ref<'all' | 'active' | 'completed'>('all')
+  const isLoading = ref(false)
+  const error = ref<string | null>(null)
 
   // Speichere Todos automatisch bei Änderungen
   watch(
@@ -65,6 +68,31 @@ export const useTodoStore = defineStore('todo', () => {
     }
   }
 
+  const importTodosFromApi = async () => {
+    isLoading.value = true
+    error.value = null
+    
+    try {
+      const apiTodos = await apiService.importTodosFromApi()
+      
+      // Konvertiere API-Todos in unser Format
+      const newTodos: Todo[] = apiTodos.map(apiTodo => ({
+        id: Date.now() + Math.random(), // Generiere eindeutige ID
+        text: apiTodo.title,
+        completed: apiTodo.completed,
+        createdAt: new Date()
+      }))
+
+      // Füge die neuen Todos hinzu
+      todos.value.push(...newTodos)
+    } catch (err) {
+      error.value = 'Fehler beim Importieren der Todos'
+      console.error(err)
+    } finally {
+      isLoading.value = false
+    }
+  }
+
   const filteredTodos = computed(() => {
     switch (filter.value) {
       case 'active':
@@ -89,8 +117,11 @@ export const useTodoStore = defineStore('todo', () => {
     filter,
     filteredTodos,
     stats,
+    isLoading,
+    error,
     addTodo,
     removeTodo,
-    toggleTodo
+    toggleTodo,
+    importTodosFromApi
   }
 }) 

@@ -4,11 +4,22 @@
       <h1>Aufgabenliste</h1>
     </template>
 
-    <TodoInput 
-      placeholder="Neue Aufgabe hinzufügen..."
-      buttonText="Hinzufügen"
-      errorMessage="Bitte geben Sie einen Text für die Aufgabe ein."
-    />
+    <div class="actions">
+      <TodoInput 
+        placeholder="Neue Aufgabe hinzufügen..."
+        buttonText="Hinzufügen"
+        errorMessage="Bitte geben Sie einen Text für die Aufgabe ein."
+      />
+      <button 
+        @click="todoStore.importTodosFromApi"
+        :disabled="todoStore.isLoading"
+        class="import-button"
+      >
+        {{ todoStore.isLoading ? 'Lade...' : 'Beispiel-Todos laden' }}
+      </button>
+      <p v-if="todoStore.error" class="error-message">{{ todoStore.error }}</p>
+    </div>
+
     <TodoFilter 
       :isVertical="false"
       activeColor="#4CAF50"
@@ -51,6 +62,37 @@ const todoStore = useTodoStore()
 h1 {
   text-align: center;
   color: #2c3e50;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.import-button {
+  padding: 0.5rem;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.import-button:hover:not(:disabled) {
+  background-color: #1976D2;
+}
+
+.import-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 0.9rem;
   margin: 0;
 }
 

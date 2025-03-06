@@ -12,6 +12,7 @@ Eine moderne Todo-Listen-Anwendung, entwickelt mit Vue 3 und TypeScript. Die Anw
 - 📱 Responsive Design
 - 💾 Automatische Speicherung im LocalStorage
 - 🎨 Visuelles Feedback und Animationen
+- 🌐 Integration mit einer REST API
 
 ## Installation
 
@@ -45,6 +46,7 @@ Eine moderne Todo-Listen-Anwendung, entwickelt mit Vue 3 und TypeScript. Die Anw
 - Pinia für State Management
 - Vite als Build-Tool
 - LocalStorage für Datenpersistenz
+- JSONPlaceholder API für Beispieldaten
 
 ## Entwicklungshinweise
 
@@ -53,6 +55,7 @@ Eine moderne Todo-Listen-Anwendung, entwickelt mit Vue 3 und TypeScript. Die Anw
 - TypeScript wird für bessere Typsicherheit eingesetzt
 - Komponenten sind modular und wiederverwendbar gestaltet
 - Fehlerbehandlung für Benutzereingaben ist implementiert
+- Single-Page-Anwendung ohne Router für einfache Struktur
 
 ## Build für Produktion
 

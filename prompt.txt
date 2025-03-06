@@ -1,0 +1,12 @@
+beim projekt handelt es sich um eine todolist. es ist ein schulprojekt. daher ist es nit wichtig das allles einen sinn hat sondern es soll nur code technisch sauber sein.
+
+beachte immer beim programmieren folgende punkte und halte es schlicht und sauber.
+Acht dabei darauf das:
+'- Die Vue-Applikation ist durchgehend in der Composition API geschrieben.
+- Bezeichnungen/Namen sind "selbsterklärend" (z.B. keine Einzelbuchstaben als variabel Name) oder passend dokumentiert.
+- Komponentennamen sind in "PascalCase", alle anderen in "camelCase"
+- In JS wird "const" gegenüber "let" bevorzugt.
+- Sinnvolle Verwendung von Funktionen. Dazu gehört:
+-- Auslagerung von Code falls er an mehreren Stellen verwendet wird
+-- Auslagerung in Funktionen, damit eine andere Funktion kürzer
+--Nutzerfehler werden antizipiert und durch entsprechende Checks abgefangen und behandelt.

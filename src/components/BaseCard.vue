@@ -13,7 +13,17 @@
 </template>
 
 <script setup lang="ts">
-// Diese Komponente verwendet Slots für flexible Inhaltsgestaltung
+/**
+ * BaseCard Komponente
+ * 
+ * Eine wiederverwendbare Container-Komponente mit drei Slots:
+ * - header: Für den Kopfbereich (optional)
+ * - default: Für den Hauptinhalt
+ * - footer: Für den Fußbereich (optional)
+ * 
+ * Die Komponente bietet eine einheitliche Darstellung mit Schatten und Rundungen
+ * und passt sich flexibel an den Inhalt an.
+ */
 </script>
 
 <style scoped>

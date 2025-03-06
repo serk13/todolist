@@ -21,11 +21,16 @@
 import { useTodoStore } from '@/stores/todoStore'
 import type { Todo } from '@/stores/todoStore'
 
+/**
+ * Props für die TodoItem-Komponente
+ * Erwartet ein Todo-Objekt, das angezeigt werden soll
+ */
 const props = defineProps<{
   todo: Todo
 }>()
 
 const todoStore = useTodoStore()
+// Destrukturiere die benötigten Methoden aus dem Store
 const { removeTodo, toggleTodo } = todoStore
 </script>
 

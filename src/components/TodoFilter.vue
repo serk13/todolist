@@ -17,6 +17,10 @@
 import { computed } from 'vue'
 import { useTodoStore } from '@/stores/todoStore'
 
+/**
+ * Props für die TodoFilter-Komponente
+ * Ermöglichen die Anpassung der Darstellung und des Verhaltens
+ */
 const props = defineProps<{
   isVertical?: boolean
   activeColor?: string
@@ -24,12 +28,20 @@ const props = defineProps<{
 
 const todoStore = useTodoStore()
 
+/**
+ * Definiert die verfügbaren Filter-Optionen
+ * Jede Option hat einen Wert und ein Label
+ */
 const filterOptions = [
   { value: 'all', label: 'Alle' },
   { value: 'active', label: 'Aktiv' },
   { value: 'completed', label: 'Erledigt' }
 ] as const
 
+/**
+ * Computed Property für die dynamischen Styles der Filter-Buttons
+ * Gibt eine Funktion zurück, die basierend auf dem aktiven Filter die Styles berechnet
+ */
 const getButtonStyle = computed(() => (value: typeof filterOptions[number]['value']) => {
   const isActive = value === todoStore.filter
   return {

@@ -1,9 +1,11 @@
 <template>
   <BaseCard class="todo-list">
+    <!-- Header-Bereich mit Titel -->
     <template #header>
       <h1>Aufgabenliste</h1>
     </template>
 
+    <!-- Aktionsbereich mit Eingabefeld und Import-Button -->
     <div class="actions">
       <TodoInput 
         placeholder="Neue Aufgabe hinzufügen..."
@@ -20,11 +22,13 @@
       <p v-if="todoStore.error" class="error-message">{{ todoStore.error }}</p>
     </div>
 
+    <!-- Filterbereich -->
     <TodoFilter 
       :isVertical="false"
       activeColor="#4CAF50"
     />
     
+    <!-- Liste der Todos mit Animation -->
     <div class="todos" role="list">
       <TransitionGroup name="list">
         <TodoItem
@@ -36,6 +40,7 @@
       </TransitionGroup>
     </div>
 
+    <!-- Footer-Bereich mit Statistiken -->
     <template #footer>
       <TodoStats v-if="todoStore.stats.total > 0" />
     </template>
@@ -43,6 +48,13 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * TodoList Komponente
+ * 
+ * Hauptkomponente der Anwendung, die alle anderen Todo-Komponenten zusammenführt.
+ * Verwendet die BaseCard-Komponente als Container und organisiert die Unterkomponenten
+ * in einer strukturierten Ansicht.
+ */
 import { useTodoStore } from '@/stores/todoStore'
 import TodoInput from './TodoInput.vue'
 import TodoItem from './TodoItem.vue'

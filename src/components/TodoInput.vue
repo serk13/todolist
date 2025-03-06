@@ -24,6 +24,10 @@
 import { ref, computed } from 'vue'
 import { useTodoStore } from '@/stores/todoStore'
 
+/**
+ * Props für die TodoInput-Komponente
+ * Ermöglichen die Anpassung des Eingabefelds und der Fehlermeldungen
+ */
 const props = defineProps<{
   placeholder: string
   buttonText: string
@@ -34,6 +38,10 @@ const todoStore = useTodoStore()
 const newTodoText = ref('')
 const showError = ref(false)
 
+/**
+ * Computed Property für dynamische Styles des Eingabefelds
+ * Ändert die Darstellung basierend auf dem Fehlerzustand
+ */
 const inputStyle = computed(() => {
   return {
     borderColor: showError.value ? '#ff4444' : '#ddd',
@@ -41,6 +49,10 @@ const inputStyle = computed(() => {
   }
 })
 
+/**
+ * Behandelt das Absenden des Formulars
+ * Validiert die Eingabe und fügt bei Erfolg ein neues Todo hinzu
+ */
 const handleSubmit = () => {
   if (!newTodoText.value.trim()) {
     showError.value = true

@@ -25,6 +25,10 @@ import { useTodoStore } from '@/stores/todoStore'
 
 const todoStore = useTodoStore()
 
+/**
+ * Computed Property für die Styles des Fortschrittsbalkens
+ * Berechnet die Breite und Farbe basierend auf dem Fortschritt
+ */
 const progressStyle = computed(() => {
   const percentage = (todoStore.stats.completed / todoStore.stats.total) * 100
   return {
@@ -33,6 +37,10 @@ const progressStyle = computed(() => {
   }
 })
 
+/**
+ * Computed Property für den Abschlussstatus
+ * Gibt true zurück, wenn alle Todos erledigt sind
+ */
 const isCompleted = computed(() => {
   return todoStore.stats.completed === todoStore.stats.total
 })

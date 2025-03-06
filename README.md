@@ -146,9 +146,7 @@ Die optimierten Dateien werden im `dist`-Verzeichnis erstellt.
 
 ## Lizenz
 
-Dieses Projekt ist unter der MIT-Lizenz veröffentlicht. Siehe die [LICENSE](LICENSE) Datei für Details.
-
-Copyright (c) 2023 [Dein Name/Organisation]
+Copyright (c) 2025 [Serkan.C]
 
 Die Verwendung dieser Software ist für Bildungszwecke ohne Einschränkungen gestattet. Für kommerzielle Nutzung wird eine Erwähnung des ursprünglichen Autors empfohlen.
 
